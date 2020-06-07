@@ -14,8 +14,7 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 
 var fight = function(enemyName) {
-    
-    while(enemyHealth >0 ) {
+    while(enemyHealth >0 && playerHealth > 0) {
 
         //Ask user if they want to fight
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
@@ -31,6 +30,7 @@ var fight = function(enemyName) {
             //check enemy's health
             if (enemyHealth <= 0) {
                 window.alert(enemyName + " has died!");
+                break;
             } else {
                 window.alert(enemyName + " still has " + enemyHealth + " health left.");
             }
@@ -44,19 +44,24 @@ var fight = function(enemyName) {
             // check player's health
             if (playerHealth <= 0) {
                 window.alert(playerName + " has died!");
+                break;
             } else { 
                 window.alert(playerName + " still has " + playerHealth + "health left.");
             }
             //if player chooses to skip
             // String comparisons like this can be tricky. SkIp is also valid. Convert both sides to upper or lower case for comparison. Not important right this second tho
             // - https://www.w3schools.com/jsref/jsref_touppercase.asp
-            } else if (promptFight === "skip" || promptFight === "SKIP") {
+            } 
+            if (promptFight === "skip" || promptFight === "SKIP") {
                 var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
                 //if yes (true), leave fight
                 if (confirmSkip) {
-                    window.alert(playerName + " has decided to ksip this fight. Goodbye!");
+                    window.alert(playerName + " has decided to skip this fight. Goodbye!");
                     //subtract money from playerMoney for skipping
-                    playerMoney = playerMoney - 2;
+                    playerMoney = playerMoney - 10;
+                    console.log("playerMoney", playerMoney);
+                    break;
                 }
                 else{
                     fight();
