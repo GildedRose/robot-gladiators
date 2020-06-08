@@ -63,6 +63,10 @@ var fight = function(enemyName) {
     }    
 };       
 var startGame = function(){
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+    debugger
     for (var i = 0; i < enemyNames.length; i++) {
         if (playerHealth > 0){
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
@@ -87,6 +91,7 @@ var endGame = function() {
     var playAgainConfirm = window.confirm("Would you like to play again?");
     if (playAgainConfirm) {
         startGame();
+        console.log("called startGame()");
     }
     else {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
