@@ -18,12 +18,12 @@ var fightOrSkip = function (){
 
     //Conditional Recursove Function Call
     if (promptFight === "" || promptFight === null) {
-        window.alert("YYou need to provide a valid answer! Please try again.");
+        window.alert("You need to provide a valid answer! Please try again.");
         return fightOrSkip();
     }
+        promptFight = promptFight.toLowerCase();
 
-    //if user picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP"){
+        if (promptFight === "skip") {
         //confirm user wants to skip
         var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
@@ -31,16 +31,19 @@ var fightOrSkip = function (){
         if (confirmSkip) {
             window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
             //subtract money from playerMoney for skipping
-            playerInfo.playerMoney = playerInfo.money - 10;
+            playerInfo.money = Math.max(0, playerInfo.money -10);
+
+            return true;
+        }
             shop();
         }
-    }
 }
 
 var fight = function(enemy) {
     while(enemy.health > 0 && playerInfo.health > 0) {
-        fightOrSkip();
-            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+        if (fightOrSkip()){
+            break;
+        }
         //remove enemy health
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
